@@ -1,0 +1,82 @@
+Order of the Bee
+================
+
+DISTRO - Distribution Committee Report - Summit 2014
+-----------------------------------------------------
+
+
+DRAFT VERSION
+
+
+Chair: Ben Chevallereau
+
+Committee Description: Work on how the Order-specific distribution will work. Establish standards, source code control, QA. Set milestones. Pick a name (other than "OOTB Edition"). Do the work.
+
+Progress on the actions:
+
+* Work on how the Order-specific distribution will work
+
+    MC created a first pass at a puppet/vagrant driven development process for the distro
+    and forked it here https://github.com/OrderOfTheBee/ootb-allinone-mysql - all future 
+    work will take place on the fork.
+
+    The vagrant build creates a couple of VMs - at this point there is one that is used
+    just to build the addons and then one to create an alfresco instance with those addons
+    installed. This build will allow addon developers to ensure their addon runs with 
+    particular versions of DISTRO
+
+    The intention is that the same puppet configuration that is used in the vagrant build
+    will be used to directly provision live instances of the distro (using "puppet-apply")
+    if required. At the moment this build process does not include any vision for installers
+    not based on puppet.
+
+* Establish standards, source code control, QA. 
+
+    As mentioned above, puppet and vagrant have been used to create a repeatable build 
+    process and we have used github source control to store the results of that.
+
+    There is also a plan for the build system to include an extra VM to run tests,
+    probably using Robot Framework along with Selenium for UI based tests (i.e. is this
+    addon installed, can we see its UI artefacts, are other expected elements present)
+
+    As far as standards, MC has proposed that no addon be accepted into DISTRO unless
+    it has:
+
+    * Enough documentation to allow a rookie user to access most or all of the functionality 
+      of the addon
+    * At least a few basic tests to demonstrate the addon's correct running
+    * It would be the responsibility of the sponsor of the addon's inclusion in DISTRO to 
+      provide the tests.
+
+* Set milestones. 
+
+"Summit"
+
+    The build system currently builds four addons (chosen not for eventual inclusion but
+    to demonstrate different build styles, e.g. AMPs from github, jar builds, etc) and 
+    installs them in the alfresco build. This is the "Summit" milestone.
+
+"Testable"
+
+    At this milestone it should be easy to test installed addons and it should be obvious
+    through documentation and examples how to create tests to support the inclusion of
+    addons
+
+"Selection"
+
+    A selection of addons takes place. It's possible that there might be vertical iterations
+    of this process to provide addon sets for individual circumstances but the first 
+    selection of addons should be generic (although that is to be discussed). This could 
+    take place in parallel with the "Testable" milestone.
+
+"Distribute"
+
+    We create a 1.0.0 distribution of the Order of the Bee distro
+
+* Pick a name (other than "OOTB Edition").
+
+    "Alfresco BE" (Bee Edition) got a lot of traction but we could never use it due to the
+    copyright.
+
+    "Honeycomb" was mostly agreed on as the distribution name, although that does clash 
+    with what was originally chosen for the curated addons.
